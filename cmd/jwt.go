@@ -22,7 +22,3 @@ var jwtDecodeCmd = &cobra.Command{
 		fmt.Print(string(pretty.Color(pretty.Pretty([]byte(data)), nil)))
 	},
 }
-
-func init() {
-	rootCmd.AddCommand(jwtDecodeCmd)
-}

@@ -20,3 +20,13 @@ func Execute() {
 		os.Exit(1)
 	}
 }
+
+func init() {
+	rootCmd.AddCommand(commands()...)
+}
+
+func commands() []*cobra.Command {
+	return []*cobra.Command{
+		jwtDecodeCmd,
+	}
+}

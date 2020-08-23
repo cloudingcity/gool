@@ -60,7 +60,7 @@ func (i *Interactive) run(input string) {
 	if input == "" {
 		return
 	}
-	if strings.HasPrefix(input, `\`) {
+	if strings.HasPrefix(input, `\`) && len(input) >= 2 {
 		i.runCommand(input)
 		return
 	}

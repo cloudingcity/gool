@@ -55,6 +55,7 @@ jwt-decode=#
 
 | Script            | Description                   |
 |-------------------|-------------------------------|
+| timestamp-to-date | Covert unix timestamp to date |
 | date-to-timestamp | Covert date to unix timestamp |
 | jwt-decode        | Decode [JWT](https://jwt.io/) |
 

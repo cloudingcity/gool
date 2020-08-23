@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -36,7 +37,7 @@ func (i *Interactive) Register(scripts ...*cobra.Command) {
 }
 
 func (i *Interactive) Run() {
-	fmt.Fprintln(i.out, `Gool Shell`)
+	color.New(color.FgCyan).Fprintln(i.out, `Gool Shell`)
 	fmt.Fprintln(i.out, `\h: show help`)
 
 	reader := bufio.NewReader(i.in)
@@ -45,7 +46,7 @@ func (i *Interactive) Run() {
 			fmt.Fprintln(i.out, `Good Bye!`)
 			return
 		}
-		fmt.Fprint(i.out, i.current+prompt)
+		color.New(color.FgHiBlue).Fprint(i.out, i.current+prompt)
 		text, err := reader.ReadString('\n')
 		if err != nil {
 			break

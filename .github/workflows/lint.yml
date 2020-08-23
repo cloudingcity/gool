@@ -1,0 +1,12 @@
+name: Lint
+on: [push, pull_request]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Repository
+        uses: actions/checkout@v2
+      - name: Run Golint
+        uses: golangci/golangci-lint-action@v1
+        with:
+          version: v1.30

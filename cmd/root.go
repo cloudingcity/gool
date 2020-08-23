@@ -28,6 +28,7 @@ func init() {
 
 func commands() []*cobra.Command {
 	return []*cobra.Command{
+		dateToTimestampCmd,
 		jwtDecodeCmd,
 	}
 }

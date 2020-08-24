@@ -42,17 +42,18 @@ func (i *Interactive) Run() {
 
 	reader := bufio.NewReader(i.in)
 	for {
-		if i.quit {
-			fmt.Fprintln(i.out, `Good Bye!`)
-			return
-		}
 		color.New(color.FgHiBlue).Fprint(i.out, i.current+prompt)
 		text, err := reader.ReadString('\n')
 		if err != nil {
 			break
 		}
-		input := strings.TrimSuffix(text, "\n")
+		input := strings.TrimSpace(text)
 		i.run(input)
+
+		if i.quit {
+			fmt.Fprintln(i.out, `Good Bye!`)
+			break
+		}
 	}
 }
 

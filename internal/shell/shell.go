@@ -48,7 +48,7 @@ func (s *Shell) Run() {
 			break
 		}
 		input := strings.TrimSpace(text)
-		s.run(input)
+		s.exec(input)
 
 		if s.quit {
 			fmt.Fprintln(s.out, `Good Bye!`)
@@ -57,18 +57,18 @@ func (s *Shell) Run() {
 	}
 }
 
-func (s *Shell) run(input string) {
+func (s *Shell) exec(input string) {
 	if input == "" {
 		return
 	}
 	if strings.HasPrefix(input, `\`) && len(input) >= 2 {
-		s.runCommand(input)
+		s.execCommand(input)
 		return
 	}
-	s.runScript(input)
+	s.execScript(input)
 }
 
-func (s *Shell) runCommand(cmd string) {
+func (s *Shell) execCommand(cmd string) {
 	switch cmd[1:2] {
 	case "h":
 		fmt.Fprintln(s.out, `  \h show help`)
@@ -96,7 +96,7 @@ func (s *Shell) runCommand(cmd string) {
 	}
 }
 
-func (s *Shell) runScript(input string) {
+func (s *Shell) execScript(input string) {
 	if s.current == "" {
 		return
 	}

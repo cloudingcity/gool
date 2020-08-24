@@ -15,7 +15,7 @@ var (
 		Use: "fake",
 		Run: func(cmd *cobra.Command, args []string) {
 			fmt.Println(123)
-			fmt.Fprint(fakeOut, "fake run")
+			fmt.Fprint(fakeOut, "fake exec")
 		},
 	}
 )
@@ -69,7 +69,7 @@ func TestInteractive(t *testing.T) {
 
 			assert.Contains(t, got, `script "not-exists" does not exists`)
 		})
-		t.Run("run script", func(t *testing.T) {
+		t.Run("exec script", func(t *testing.T) {
 			in := bytes.NewBufferString("\\c fake\nenter something\n")
 			out := &bytes.Buffer{}
 			shell := New(in, out)
@@ -78,7 +78,7 @@ func TestInteractive(t *testing.T) {
 			got := out.String()
 
 			assert.Contains(t, got, "fake=#")
-			assert.Contains(t, fakeOut.String(), "fake run")
+			assert.Contains(t, fakeOut.String(), "fake exec")
 			fakeOut = &bytes.Buffer{}
 		})
 	})

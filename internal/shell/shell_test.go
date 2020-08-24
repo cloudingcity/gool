@@ -1,4 +1,4 @@
-package interactive
+package shell
 
 import (
 	"bytes"
@@ -72,9 +72,9 @@ func TestInteractive(t *testing.T) {
 		t.Run("run script", func(t *testing.T) {
 			in := bytes.NewBufferString("\\c fake\nenter something\n")
 			out := &bytes.Buffer{}
-			i := New(in, out)
-			i.Register(fakeCmd)
-			i.Run()
+			shell := New(in, out)
+			shell.Register(fakeCmd)
+			shell.Run()
 			got := out.String()
 
 			assert.Contains(t, got, "fake=#")
@@ -86,9 +86,9 @@ func TestInteractive(t *testing.T) {
 	t.Run("enter \\l", func(t *testing.T) {
 		in := bytes.NewBufferString("\\l\n")
 		out := &bytes.Buffer{}
-		i := New(in, out)
-		i.Register(fakeCmd)
-		i.Run()
+		shell := New(in, out)
+		shell.Register(fakeCmd)
+		shell.Run()
 		got := out.String()
 
 		assert.Contains(t, got, "fake")

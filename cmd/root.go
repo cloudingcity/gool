@@ -23,6 +23,7 @@ func Execute() {
 
 func init() {
 	cobra.EnableCommandSorting = false
+	rootCmd.AddCommand(shellCmd)
 	rootCmd.AddCommand(commands()...)
 }
 

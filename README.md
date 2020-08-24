@@ -27,10 +27,10 @@ $ gool jwt-decode eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwI
 }
 ```
 
-### Interactive Mode
+### Gool Shell
 
 ```shell script
-$ gool i
+$ gool shell 
 Gool Shell
 \h: show help
 =# \c jwt-decode

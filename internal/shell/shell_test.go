@@ -48,9 +48,21 @@ func TestInteractive(t *testing.T) {
 
 		assert.Contains(t, got, "Available Commands:")
 		assert.Contains(t, got, `\h show help`)
-		assert.Contains(t, got, `\s switch to the specified script`)
 		assert.Contains(t, got, `\l list available scripts`)
+		assert.Contains(t, got, `\s switch to the specified script`)
 		assert.Contains(t, got, `\q to quit`)
+	})
+
+	t.Run("enter \\l", func(t *testing.T) {
+		in := bytes.NewBufferString("\\l\n")
+		out := &bytes.Buffer{}
+		shell := New(in, out)
+		shell.Register(fakeCmd)
+		shell.Run()
+		got := out.String()
+
+		assert.Contains(t, got, "Available Scripts:")
+		assert.Contains(t, got, "fake")
 	})
 
 	t.Run("enter \\s", func(t *testing.T) {
@@ -82,18 +94,6 @@ func TestInteractive(t *testing.T) {
 			assert.Contains(t, fakeOut.String(), "fake exec")
 			fakeOut = &bytes.Buffer{}
 		})
-	})
-
-	t.Run("enter \\l", func(t *testing.T) {
-		in := bytes.NewBufferString("\\l\n")
-		out := &bytes.Buffer{}
-		shell := New(in, out)
-		shell.Register(fakeCmd)
-		shell.Run()
-		got := out.String()
-
-		assert.Contains(t, got, "Available Scripts:")
-		assert.Contains(t, got, "fake")
 	})
 
 	t.Run("enter \\q", func(t *testing.T) {

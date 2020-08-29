@@ -26,8 +26,8 @@ type cmd struct {
 
 var cmds = []cmd{
 	{cmd: `\h`, desc: "show help"},
-	{cmd: `\s`, desc: "switch to the specified script"},
 	{cmd: `\l`, desc: "list available scripts"},
+	{cmd: `\s`, desc: "switch to the specified script"},
 	{cmd: `\q`, desc: "to quit"},
 }
 
@@ -97,6 +97,11 @@ func (s *Shell) execCommand(cmd string) {
 		for _, cmd := range cmds {
 			fmt.Fprintf(s.out, "  %s %s\n", green(cmd.cmd), yellow(cmd.desc))
 		}
+	case "l":
+		fmt.Fprintln(s.out, "Available Scripts:")
+		for _, name := range s.names {
+			fmt.Fprintf(s.out, "  %s\n", yellow(name))
+		}
 	case "s":
 		fields := strings.Fields(cmd)
 		if len(fields) < 2 {
@@ -109,11 +114,6 @@ func (s *Shell) execCommand(cmd string) {
 			return
 		}
 		s.current = script
-	case "l":
-		fmt.Fprintln(s.out, "Available Scripts:")
-		for _, name := range s.names {
-			fmt.Fprintf(s.out, "  %s\n", yellow(name))
-		}
 	case "q":
 		s.quit = true
 	}

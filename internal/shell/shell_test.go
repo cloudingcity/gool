@@ -59,7 +59,7 @@ func TestInteractive(t *testing.T) {
 			New(in, out).Run()
 			got := out.String()
 
-			assert.Contains(t, got, "Missing script")
+			assert.Contains(t, got, "No script given")
 		})
 		t.Run("script not found", func(t *testing.T) {
 			in := bytes.NewBufferString("\\c not-exists\n")

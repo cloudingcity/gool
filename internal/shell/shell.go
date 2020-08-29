@@ -78,7 +78,7 @@ func (s *Shell) execCommand(cmd string) {
 	case "c":
 		fields := strings.Fields(cmd)
 		if len(fields) < 2 {
-			fmt.Fprintln(s.out, "Missing script")
+			fmt.Fprintln(s.out, "No script given")
 			return
 		}
 		script := fields[1]

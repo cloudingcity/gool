@@ -48,14 +48,14 @@ func TestInteractive(t *testing.T) {
 
 		assert.Contains(t, got, "Available Commands:")
 		assert.Contains(t, got, `\h show help`)
-		assert.Contains(t, got, `\c change current script`)
+		assert.Contains(t, got, `\s switch to the specified script`)
 		assert.Contains(t, got, `\l list available scripts`)
 		assert.Contains(t, got, `\q to quit`)
 	})
 
-	t.Run("enter \\c", func(t *testing.T) {
+	t.Run("enter \\s", func(t *testing.T) {
 		t.Run("without script", func(t *testing.T) {
-			in := bytes.NewBufferString("\\c\n")
+			in := bytes.NewBufferString("\\s\n")
 			out := &bytes.Buffer{}
 			New(in, out).Run()
 			got := out.String()
@@ -63,7 +63,7 @@ func TestInteractive(t *testing.T) {
 			assert.Contains(t, got, "No script given")
 		})
 		t.Run("script not found", func(t *testing.T) {
-			in := bytes.NewBufferString("\\c not-exists\n")
+			in := bytes.NewBufferString("\\s not-exists\n")
 			out := &bytes.Buffer{}
 			New(in, out).Run()
 			got := out.String()
@@ -71,7 +71,7 @@ func TestInteractive(t *testing.T) {
 			assert.Contains(t, got, `script "not-exists" does not exists`)
 		})
 		t.Run("exec script", func(t *testing.T) {
-			in := bytes.NewBufferString("\\c fake\nenter something\n")
+			in := bytes.NewBufferString("\\s fake\nenter something\n")
 			out := &bytes.Buffer{}
 			shell := New(in, out)
 			shell.Register(fakeCmd)

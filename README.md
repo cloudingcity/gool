@@ -33,7 +33,7 @@ $ gool jwt-decode eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwI
 $ gool shell 
 Gool Shell
 \h: show help
-=# \c jwt-decode
+=# \s jwt-decode
 jwt-decode=# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 {
   "header": {
@@ -53,10 +53,10 @@ jwt-decode=#
 
 ## Scripts
 
-| Script            | Description                   |
-|-------------------|-------------------------------|
-| timestamp-to-date | Covert unix timestamp to date |
-| date-to-timestamp | Covert date to unix timestamp |
-| jwt-decode        | Decode [JWT](https://jwt.io/) |
+| Script                 | Description                   |
+|------------------------|-------------------------------|
+| timestamp-to-date, t2d | Covert unix timestamp to date |
+| date-to-timestamp, d2t | Covert date to unix timestamp |
+| jwt-decode             | Decode [JWT](https://jwt.io/) |
 
 

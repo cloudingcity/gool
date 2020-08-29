@@ -28,7 +28,7 @@ func TestInteractive(t *testing.T) {
 		got := out.String()
 
 		assert.Contains(t, got, "Gool Shell")
-		assert.Contains(t, got, `\h: show help`)
+		assert.Contains(t, got, `\h show help`)
 	})
 
 	t.Run("enter blank", func(t *testing.T) {
@@ -46,7 +46,8 @@ func TestInteractive(t *testing.T) {
 		New(in, out).Run()
 		got := out.String()
 
-		assert.Contains(t, got, `\h: show help`)
+		assert.Contains(t, got, "Available Commands:")
+		assert.Contains(t, got, `\h show help`)
 		assert.Contains(t, got, `\c change current script`)
 		assert.Contains(t, got, `\l list available scripts`)
 		assert.Contains(t, got, `\q to quit`)
@@ -91,6 +92,7 @@ func TestInteractive(t *testing.T) {
 		shell.Run()
 		got := out.String()
 
+		assert.Contains(t, got, "Available Scripts:")
 		assert.Contains(t, got, "fake")
 	})
 

@@ -12,6 +12,25 @@ import (
 
 const prompt = "=# "
 
+var (
+	cyan   = color.New(color.FgCyan).SprintfFunc()
+	blue   = color.New(color.FgHiBlue).SprintfFunc()
+	green  = color.New(color.FgGreen).SprintFunc()
+	yellow = color.New(color.FgYellow).SprintfFunc()
+)
+
+type cmd struct {
+	cmd  string
+	desc string
+}
+
+var cmds = []cmd{
+	{cmd: `\h`, desc: "show help"},
+	{cmd: `\c`, desc: "change current script"},
+	{cmd: `\l`, desc: "list available scripts"},
+	{cmd: `\q`, desc: "to quit"},
+}
+
 type Shell struct {
 	in      io.Reader
 	out     io.Writer
@@ -37,12 +56,15 @@ func (s *Shell) Register(scripts ...*cobra.Command) {
 }
 
 func (s *Shell) Run() {
-	color.New(color.FgCyan).Fprintln(s.out, `Gool Shell`)
-	fmt.Fprintln(s.out, `\h: show help`)
+	fmt.Fprintln(s.out, cyan("Gool Shell"))
+	fmt.Fprintln(s.out, cmds[0].cmd, cmds[0].desc)
 
 	reader := bufio.NewReader(s.in)
 	for {
-		color.New(color.FgHiBlue).Fprint(s.out, s.current+prompt)
+		if s.current != "" {
+			fmt.Fprint(s.out, yellow(s.current))
+		}
+		fmt.Fprint(s.out, blue(prompt))
 		text, err := reader.ReadString('\n')
 		if err != nil {
 			break
@@ -71,10 +93,10 @@ func (s *Shell) exec(input string) {
 func (s *Shell) execCommand(cmd string) {
 	switch cmd[1:2] {
 	case "h":
-		fmt.Fprintln(s.out, `  \h show help`)
-		fmt.Fprintln(s.out, `  \c change current script`)
-		fmt.Fprintln(s.out, `  \l list available scripts`)
-		fmt.Fprintln(s.out, `  \q to quit`)
+		fmt.Fprintln(s.out, "Available Commands:")
+		for _, cmd := range cmds {
+			fmt.Fprintf(s.out, "  %s %s\n", green(cmd.cmd), yellow(cmd.desc))
+		}
 	case "c":
 		fields := strings.Fields(cmd)
 		if len(fields) < 2 {
@@ -88,8 +110,9 @@ func (s *Shell) execCommand(cmd string) {
 		}
 		s.current = script
 	case "l":
+		fmt.Fprintln(s.out, "Available Scripts:")
 		for _, name := range s.names {
-			fmt.Fprintln(s.out, name)
+			fmt.Fprintf(s.out, "  %s\n", yellow(name))
 		}
 	case "q":
 		s.quit = true

@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"os/exec"
 	"strings"
 
 	"github.com/fatih/color"
@@ -28,6 +29,7 @@ var cmds = []cmd{
 	{cmd: `\h`, desc: "show help"},
 	{cmd: `\l`, desc: "list available scripts"},
 	{cmd: `\s`, desc: "switch to the specified script"},
+	{cmd: `\c`, desc: "clean the terminal screen"},
 	{cmd: `\q`, desc: "to quit"},
 }
 
@@ -114,6 +116,10 @@ func (s *Shell) execCommand(cmd string) {
 			return
 		}
 		s.current = script
+	case "c":
+		cmd := exec.Command("clear")
+		cmd.Stdout = s.out
+		_ = cmd.Run()
 	case "q":
 		s.quit = true
 	}

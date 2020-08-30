@@ -53,10 +53,15 @@ jwt-decode=#
 
 ## Scripts
 
-| Script                 | Description                   |
-|------------------------|-------------------------------|
-| timestamp-to-date, t2d | Covert unix timestamp to date |
-| date-to-timestamp, d2t | Covert date to unix timestamp |
-| jwt-decode             | Decode [JWT](https://jwt.io/) |
-
+| Script                 | Description                                                                                              |
+|------------------------|----------------------------------------------------------------------------------------------------------|
+| timestamp-to-date, t2d | Covert unix timestamp to date                                                                            |
+| date-to-timestamp, d2t | Covert date to unix timestamp                                                                            |
+| jwt-decode             | Decode [JWT](https://jwt.io/)                                                                            |
+| camel-case             | Coverts string to [camel case](https://en.wikipedia.org/wiki/Camel_case)                                 |
+| kebab-case             | Coverts string to [kebab case](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles)            |
+| lower-case             | Coverts string to lower case                                                                             |
+| snake-case             | Coverts string to [snake case](https://en.wikipedia.org/wiki/Snake_case)                                 |
+| start-case             | Coverts string to [start case](https://en.wikipedia.org/wiki/Letter_case#Stylistic_or_specialised_usage) |
+| upper-case             | Coverts string to upper case                                                                             |
 

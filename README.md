@@ -65,3 +65,30 @@ jwt-decode=#
 | start-case             | Coverts string to [start case](https://en.wikipedia.org/wiki/Letter_case#Stylistic_or_specialised_usage) |
 | upper-case             | Coverts string to upper case                                                                             |
 
+## Library
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/cloudingcity/gool/pkg/cases"
+	"github.com/cloudingcity/gool/pkg/date"
+	"github.com/cloudingcity/gool/pkg/timestamp"
+)
+
+func main() {
+	fmt.Println(cases.Snake("HelloWorld"))
+	// hello_world
+
+	fmt.Println(cases.Camel("hello world"))
+	// helloWorld
+
+	fmt.Println(date.ToTimestamp("2020-09-01"))
+	// 1598918400 <nil>
+	
+	fmt.Println(timestamp.ToDate(1598918400))
+	// 2020-09-01 08:00:00 +0800 CST
+}
+```

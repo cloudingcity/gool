@@ -2,12 +2,27 @@
 
 ![Test](https://github.com/cloudingcity/gool/workflows/Test/badge.svg)
 ![Lint](https://github.com/cloudingcity/gool/workflows/Lint/badge.svg)
+![Deploy](https://github.com/cloudingcity/gool/workflows/Deploy/badge.svg)
 [![codecov](https://codecov.io/gh/cloudingcity/gool/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudingcity/gool)
 [![Go Report Card](https://goreportcard.com/badge/github.com/cloudingcity/gool)](https://goreportcard.com/report/github.com/cloudingcity/gool)
 
 A toolkit make your programmer life easier.
 
 > Inspired by [Boop](https://github.com/IvanMathy/Boop)
+
+## Installation
+
+### Homebrew
+
+```shell script
+brew install cloudingcity/gool
+```
+
+### Docker
+
+```shell script
+docker run --rm -it ghost0436/gool
+```
 
 ## Usage
 

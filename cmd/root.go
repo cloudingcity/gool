@@ -38,5 +38,6 @@ func commands() []*cobra.Command {
 		SnakeCaseCmd,
 		StartCaseCmd,
 		UpperCaseCmd,
+		versionCmd,
 	}
 }

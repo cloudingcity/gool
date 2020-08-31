@@ -10,6 +10,8 @@ A toolkit make your programmer life easier.
 
 > Inspired by [Boop](https://github.com/IvanMathy/Boop)
 
+![demo](https://user-images.githubusercontent.com/11569651/91740727-47554f00-ebe6-11ea-920e-2ee326bec24a.gif)
+
 ## Installation
 
 ### Homebrew

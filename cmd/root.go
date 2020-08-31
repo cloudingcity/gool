@@ -25,6 +25,7 @@ func init() {
 	cobra.EnableCommandSorting = false
 	rootCmd.AddCommand(shellCmd)
 	rootCmd.AddCommand(commands()...)
+	rootCmd.AddCommand(versionCmd)
 }
 
 func commands() []*cobra.Command {
@@ -38,6 +39,5 @@ func commands() []*cobra.Command {
 		SnakeCaseCmd,
 		StartCaseCmd,
 		UpperCaseCmd,
-		versionCmd,
 	}
 }

@@ -63,9 +63,9 @@ func (s *Shell) Run() {
 	reader := bufio.NewReader(s.in)
 	for {
 		if s.current != "" {
-			fmt.Fprint(s.out, yellow(s.current))
+			s.print(yellow(s.current))
 		}
-		fmt.Fprint(s.out, blue(prompt))
+		s.print(blue(prompt))
 		text, err := reader.ReadString('\n')
 		if err != nil {
 			break
@@ -74,15 +74,15 @@ func (s *Shell) Run() {
 		s.exec(input)
 
 		if s.quit {
-			fmt.Fprintln(s.out, `Good Bye!`)
+			s.println(`Good Bye!`)
 			break
 		}
 	}
 }
 
 func (s *Shell) welcome() {
-	fmt.Fprintln(s.out, cyan("Gool Shell"))
-	fmt.Fprintln(s.out, cmds[0].cmd, cmds[0].desc)
+	s.println(cyan("Gool Shell"))
+	s.println(cmds[0].cmd, cmds[0].desc)
 }
 
 func (s *Shell) exec(input string) {
@@ -99,24 +99,24 @@ func (s *Shell) exec(input string) {
 func (s *Shell) execCommand(cmd string) {
 	switch cmd[1:2] {
 	case "h":
-		fmt.Fprintln(s.out, "Available Commands:")
+		s.println("Available Commands:")
 		for _, cmd := range cmds {
-			fmt.Fprintf(s.out, "  %s %s\n", green(cmd.cmd), yellow(cmd.desc))
+			s.printf("  %s %s\n", green(cmd.cmd), yellow(cmd.desc))
 		}
 	case "l":
-		fmt.Fprintln(s.out, "Available Scripts:")
+		s.println("Available Scripts:")
 		for _, name := range s.names {
-			fmt.Fprintf(s.out, "  %s\n", yellow(name))
+			s.printf("  %s\n", yellow(name))
 		}
 	case "s":
 		fields := strings.Fields(cmd)
 		if len(fields) < 2 {
-			fmt.Fprintln(s.out, "No script given")
+			s.println("No script given")
 			return
 		}
 		script := fields[1]
 		if _, ok := s.scripts[script]; !ok {
-			fmt.Fprintf(s.out, "script %q does not exists\n", script)
+			s.printf("script %q does not exists\n", script)
 			return
 		}
 		s.current = script
@@ -135,4 +135,16 @@ func (s *Shell) execScript(input string) {
 	}
 	script := s.scripts[s.current]
 	script.Run(script, []string{input})
+}
+
+func (s *Shell) print(a ...interface{}) {
+	_, _ = fmt.Fprint(s.out, a...)
+}
+
+func (s *Shell) println(a ...interface{}) {
+	_, _ = fmt.Fprintln(s.out, a...)
+}
+
+func (s *Shell) printf(format string, a ...interface{}) {
+	_, _ = fmt.Fprintf(s.out, format, a...)
 }

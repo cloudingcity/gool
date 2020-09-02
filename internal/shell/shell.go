@@ -99,34 +99,54 @@ func (s *Shell) exec(input string) {
 func (s *Shell) execCommand(cmd string) {
 	switch cmd[1:2] {
 	case "h":
-		s.println("Available Commands:")
-		for _, cmd := range cmds {
-			s.printf("  %s %s\n", green(cmd.cmd), yellow(cmd.desc))
-		}
+		s.helpCmd()
 	case "l":
-		s.println("Available Scripts:")
-		for _, name := range s.names {
-			s.printf("  %s\n", yellow(name))
-		}
+		s.listCmd()
 	case "s":
-		fields := strings.Fields(cmd)
-		if len(fields) < 2 {
-			s.println("No script given")
-			return
-		}
-		script := fields[1]
-		if _, ok := s.scripts[script]; !ok {
-			s.printf("script %q does not exists\n", script)
-			return
-		}
-		s.current = script
+		s.switchCmd(cmd)
 	case "c":
-		cmd := exec.Command("clear")
-		cmd.Stdout = s.out
-		_ = cmd.Run()
+		s.cleanCmd()
 	case "q":
-		s.quit = true
+		s.quitCmd()
 	}
+}
+
+func (s *Shell) helpCmd() {
+	s.println("Available Commands:")
+	for _, cmd := range cmds {
+		s.printf("  %s %s\n", green(cmd.cmd), yellow(cmd.desc))
+	}
+}
+
+func (s *Shell) listCmd() {
+	s.println("Available Scripts:")
+	for _, name := range s.names {
+		s.printf("  %s\n", yellow(name))
+	}
+}
+
+func (s *Shell) switchCmd(cmd string) {
+	fields := strings.Fields(cmd)
+	if len(fields) < 2 {
+		s.println("No script given")
+		return
+	}
+	script := fields[1]
+	if _, ok := s.scripts[script]; !ok {
+		s.printf("script %q does not exists\n", script)
+		return
+	}
+	s.current = script
+}
+
+func (s *Shell) cleanCmd() {
+	cmd := exec.Command("clear")
+	cmd.Stdout = s.out
+	_ = cmd.Run()
+}
+
+func (s *Shell) quitCmd() {
+	s.quit = true
 }
 
 func (s *Shell) execScript(input string) {

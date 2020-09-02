@@ -58,8 +58,7 @@ func (s *Shell) Register(scripts ...*cobra.Command) {
 }
 
 func (s *Shell) Run() {
-	fmt.Fprintln(s.out, cyan("Gool Shell"))
-	fmt.Fprintln(s.out, cmds[0].cmd, cmds[0].desc)
+	s.welcome()
 
 	reader := bufio.NewReader(s.in)
 	for {
@@ -79,6 +78,11 @@ func (s *Shell) Run() {
 			break
 		}
 	}
+}
+
+func (s *Shell) welcome() {
+	fmt.Fprintln(s.out, cyan("Gool Shell"))
+	fmt.Fprintln(s.out, cmds[0].cmd, cmds[0].desc)
 }
 
 func (s *Shell) exec(input string) {

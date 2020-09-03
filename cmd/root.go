@@ -33,6 +33,7 @@ func commands() []*cobra.Command {
 		timestampToDateCmd,
 		dateToTimestampCmd,
 		jwtDecodeCmd,
+		md5Cmd,
 		CamelCaseCmd,
 		KebabCaseCmd,
 		LowerCaseCmd,

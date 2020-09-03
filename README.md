@@ -75,6 +75,7 @@ jwt-decode=#
 | timestamp-to-date, t2d | Covert unix timestamp to date                                                                            |
 | date-to-timestamp, d2t | Covert date to unix timestamp                                                                            |
 | jwt-decode             | Decode [JWT](https://jwt.io/)                                                                            |
+| md5                    | Computes the checksum                                                                                    |
 | camel-case             | Coverts string to [camel case](https://en.wikipedia.org/wiki/Camel_case)                                 |
 | kebab-case             | Coverts string to [kebab case](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles)            |
 | lower-case             | Coverts string to lower case                                                                             |

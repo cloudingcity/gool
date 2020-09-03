@@ -8,7 +8,7 @@ import (
 )
 
 var CamelCaseCmd = &cobra.Command{
-	Use:                   "camel-case [string]",
+	Use:                   "camel-case [text]",
 	Short:                 "Coverts string to camel case",
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,
@@ -18,7 +18,7 @@ var CamelCaseCmd = &cobra.Command{
 }
 
 var KebabCaseCmd = &cobra.Command{
-	Use:                   "kebab-case [string]",
+	Use:                   "kebab-case [text]",
 	Short:                 "Coverts string to kebab case",
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,
@@ -28,7 +28,7 @@ var KebabCaseCmd = &cobra.Command{
 }
 
 var LowerCaseCmd = &cobra.Command{
-	Use:                   "lower-case [string]",
+	Use:                   "lower-case [text]",
 	Short:                 "Coverts string to lower case",
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,
@@ -38,7 +38,7 @@ var LowerCaseCmd = &cobra.Command{
 }
 
 var SnakeCaseCmd = &cobra.Command{
-	Use:                   "snake-case [string]",
+	Use:                   "snake-case [text]",
 	Short:                 "Coverts string to snake case",
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,
@@ -48,7 +48,7 @@ var SnakeCaseCmd = &cobra.Command{
 }
 
 var StartCaseCmd = &cobra.Command{
-	Use:                   "start-case [string]",
+	Use:                   "start-case [text]",
 	Short:                 "Coverts string to start case",
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,
@@ -58,7 +58,7 @@ var StartCaseCmd = &cobra.Command{
 }
 
 var UpperCaseCmd = &cobra.Command{
-	Use:                   "upper-case [string]",
+	Use:                   "upper-case [text]",
 	Short:                 "Coverts string to upper case",
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,

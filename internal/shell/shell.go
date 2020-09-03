@@ -1,12 +1,12 @@
 package shell
 
 import (
-	"bufio"
 	"fmt"
 	"io"
 	"os/exec"
 	"strings"
 
+	"github.com/chzyer/readline"
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
@@ -34,15 +34,16 @@ var cmds = []cmd{
 }
 
 type Shell struct {
-	in      io.Reader
+	in      io.ReadCloser
 	out     io.Writer
+	reader  *readline.Instance
 	current string
 	scripts map[string]*cobra.Command
 	names   []string
 	quit    bool
 }
 
-func New(in io.Reader, out io.Writer) *Shell {
+func New(in io.ReadCloser, out io.Writer) *Shell {
 	return &Shell{
 		in:      in,
 		out:     out,
@@ -58,23 +59,28 @@ func (s *Shell) Register(scripts ...*cobra.Command) {
 }
 
 func (s *Shell) Run() {
+	s.reader = newReader(s.in, s.out)
+	defer s.reader.Close()
+
 	s.welcome()
 
-	reader := bufio.NewReader(s.in)
 	for {
-		if s.current != "" {
-			s.print(yellow(s.current))
-		}
-		s.print(blue(prompt))
-		text, err := reader.ReadString('\n')
-		if err != nil {
+		line, err := s.reader.Readline()
+		if err == readline.ErrInterrupt {
+			if len(line) == 0 {
+				break
+			} else {
+				continue
+			}
+		} else if err == io.EOF {
 			break
 		}
-		input := strings.TrimSpace(text)
+
+		input := strings.TrimSpace(line)
 		s.exec(input)
 
 		if s.quit {
-			s.println(`Good Bye!`)
+			s.println("Good Bye!")
 			break
 		}
 	}
@@ -112,14 +118,14 @@ func (s *Shell) execCommand(cmd string) {
 }
 
 func (s *Shell) helpCmd() {
-	s.println("Available Commands:")
+	s.println("Commands:")
 	for _, cmd := range cmds {
 		s.printf("  %s %s\n", green(cmd.cmd), yellow(cmd.desc))
 	}
 }
 
 func (s *Shell) listCmd() {
-	s.println("Available Scripts:")
+	s.println("Scripts:")
 	for _, name := range s.names {
 		s.printf("  %s\n", yellow(name))
 	}
@@ -128,7 +134,7 @@ func (s *Shell) listCmd() {
 func (s *Shell) switchCmd(cmd string) {
 	fields := strings.Fields(cmd)
 	if len(fields) < 2 {
-		s.println("No script given")
+		s.println("no script given")
 		return
 	}
 	script := fields[1]
@@ -137,6 +143,7 @@ func (s *Shell) switchCmd(cmd string) {
 		return
 	}
 	s.current = script
+	s.reader.SetPrompt(yellow(s.current) + blue(prompt))
 }
 
 func (s *Shell) cleanCmd() {
@@ -155,10 +162,6 @@ func (s *Shell) execScript(input string) {
 	}
 	script := s.scripts[s.current]
 	script.Run(script, []string{input})
-}
-
-func (s *Shell) print(a ...interface{}) {
-	_, _ = fmt.Fprint(s.out, a...)
 }
 
 func (s *Shell) println(a ...interface{}) {

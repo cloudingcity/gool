@@ -1,8 +1,8 @@
 # Gool
 
-![Test](https://github.com/cloudingcity/gool/workflows/Test/badge.svg)
-![Lint](https://github.com/cloudingcity/gool/workflows/Lint/badge.svg)
-![Deploy](https://github.com/cloudingcity/gool/workflows/Deploy/badge.svg)
+[![Test](https://github.com/cloudingcity/gool/workflows/Test/badge.svg)](https://github.com/cloudingcity/gool/actions?query=workflow%3ATest)
+[![Lint](https://github.com/cloudingcity/gool/workflows/Lint/badge.svg)](https://github.com/cloudingcity/gool/actions?query=workflow%3ALint)
+[![Deploy](https://github.com/cloudingcity/gool/workflows/Deploy/badge.svg)](https://github.com/cloudingcity/gool/actions?query=workflow%3ADeploy)
 [![codecov](https://codecov.io/gh/cloudingcity/gool/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudingcity/gool)
 [![Go Report Card](https://goreportcard.com/badge/github.com/cloudingcity/gool)](https://goreportcard.com/report/github.com/cloudingcity/gool)
 

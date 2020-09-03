@@ -34,13 +34,14 @@ var cmds = []cmd{
 }
 
 type Shell struct {
-	in      io.ReadCloser
-	out     io.Writer
-	reader  *readline.Instance
-	current string
-	scripts map[string]*cobra.Command
-	names   []string
-	quit    bool
+	in          io.ReadCloser
+	out         io.Writer
+	reader      *readline.Instance
+	historyPath string
+	current     string
+	scripts     map[string]*cobra.Command
+	names       []string
+	quit        bool
 }
 
 func New(in io.ReadCloser, out io.Writer) *Shell {
@@ -58,8 +59,12 @@ func (s *Shell) Register(scripts ...*cobra.Command) {
 	}
 }
 
+func (s *Shell) SetHistoryPath(path string) {
+	s.historyPath = path
+}
+
 func (s *Shell) Run() {
-	s.reader = newReader(s.in, s.out)
+	s.reader = newReader(s.in, s.out, s.historyPath)
 	defer s.reader.Close()
 
 	s.welcome()

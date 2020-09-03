@@ -14,6 +14,7 @@ var shellCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		shell := shell.New(os.Stdin, os.Stdout)
 		shell.Register(commands()...)
+		shell.SetHistoryPath(os.TempDir())
 		shell.Run()
 	},
 }

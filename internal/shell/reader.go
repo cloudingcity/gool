@@ -8,7 +8,7 @@ import (
 	"github.com/chzyer/readline"
 )
 
-func newReader(in io.ReadCloser, out io.Writer, historyPath string) *readline.Instance {
+func newReader(in io.ReadCloser, out io.Writer, historyPath string, completer readline.AutoCompleter) *readline.Instance {
 	var historyFile string
 	if historyPath != "" {
 		historyFile = filepath.Join(historyPath, "gool.tmp")
@@ -17,6 +17,7 @@ func newReader(in io.ReadCloser, out io.Writer, historyPath string) *readline.In
 		Prompt:            blue(prompt),
 		HistoryFile:       historyFile,
 		HistorySearchFold: true,
+		AutoComplete:      completer,
 		InterruptPrompt:   "^C",
 		EOFPrompt:         "Good Bye!",
 		Stdin:             in,

@@ -64,7 +64,7 @@ func (s *Shell) SetHistoryPath(path string) {
 }
 
 func (s *Shell) Run() {
-	s.reader = newReader(s.in, s.out, s.historyPath)
+	s.reader = newReader(s.in, s.out, s.historyPath, s.autoCompleter())
 	defer s.reader.Close()
 
 	s.welcome()
@@ -175,4 +175,20 @@ func (s *Shell) println(a ...interface{}) {
 
 func (s *Shell) printf(format string, a ...interface{}) {
 	_, _ = fmt.Fprintf(s.out, format, a...)
+}
+
+func (s *Shell) autoCompleter() readline.AutoCompleter {
+	var pcs []readline.PrefixCompleterInterface
+	for _, cmd := range cmds {
+		if cmd.cmd == "\\s" {
+			var subs []readline.PrefixCompleterInterface
+			for _, name := range s.names {
+				subs = append(subs, readline.PcItem(name))
+			}
+			pcs = append(pcs, readline.PcItem(cmd.cmd, subs...))
+		} else {
+			pcs = append(pcs, readline.PcItem(cmd.cmd))
+		}
+	}
+	return readline.NewPrefixCompleter(pcs...)
 }

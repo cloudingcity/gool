@@ -76,6 +76,7 @@ jwt-decode=#
 | date-to-timestamp, d2t | Covert date to unix timestamp                                                                            |
 | jwt-decode             | Decode [JWT](https://jwt.io/)                                                                            |
 | md5                    | Computes the checksum                                                                                    |
+| rand-string            | Generate random string of given length (characters: a-z, A-Z, 0-9)                                       |
 | count                  | Get the characters length                                                                                |
 | camel-case             | Coverts string to [camel case](https://en.wikipedia.org/wiki/Camel_case)                                 |
 | kebab-case             | Coverts string to [kebab case](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles)            |

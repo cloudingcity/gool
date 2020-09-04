@@ -9,7 +9,7 @@ import (
 
 var countCmd = &cobra.Command{
 	Use:                   "count [text]",
-	Short:                 "Count",
+	Short:                 "Get the characters length",
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {

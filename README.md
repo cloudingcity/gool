@@ -10,7 +10,7 @@ A toolkit make your programmer life easier.
 
 > Inspired by [Boop](https://github.com/IvanMathy/Boop)
 
-![demo](https://user-images.githubusercontent.com/11569651/91740727-47554f00-ebe6-11ea-920e-2ee326bec24a.gif)
+![demo](https://user-images.githubusercontent.com/11569651/92252386-bd1c2c00-ef00-11ea-927b-8f6d752ba733.gif)
 
 ## Installation
 

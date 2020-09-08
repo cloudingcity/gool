@@ -17,7 +17,7 @@ A toolkit make your programmer life easier.
 ### Homebrew
 
 ```shell script
-brew install cloudingcity/gool
+brew install cloudingcity/tap/gool
 ```
 
 ### Docker

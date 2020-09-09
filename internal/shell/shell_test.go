@@ -85,6 +85,35 @@ func TestInteractive(t *testing.T) {
 		})
 	})
 
+	t.Run("enter \\r", func(t *testing.T) {
+		t.Run("without script", func(t *testing.T) {
+			in := ioutil.NopCloser(bytes.NewBufferString("\\r\n"))
+			out := &bytes.Buffer{}
+			New(in, out).Run()
+			got := out.String()
+
+			assert.Contains(t, got, "run script failed")
+		})
+		t.Run("script not found", func(t *testing.T) {
+			in := ioutil.NopCloser(bytes.NewBufferString("\\r not-exists-script foo\n"))
+			out := &bytes.Buffer{}
+			New(in, out).Run()
+			got := out.String()
+
+			assert.Contains(t, got, `script "not-exists-script" does not exists`)
+		})
+		t.Run("exec script", func(t *testing.T) {
+			in := ioutil.NopCloser(bytes.NewBufferString("\\r fake enter something\n"))
+			out := &bytes.Buffer{}
+			shell := New(in, out)
+			shell.Register(fakeCmd)
+			shell.Run()
+
+			assert.Contains(t, fakeOut.String(), "fake exec")
+			fakeOut = &bytes.Buffer{}
+		})
+	})
+
 	t.Run("enter \\q", func(t *testing.T) {
 		in := ioutil.NopCloser(bytes.NewBufferString("\\q\n"))
 		out := &bytes.Buffer{}

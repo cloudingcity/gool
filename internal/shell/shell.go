@@ -29,6 +29,7 @@ var cmds = []cmd{
 	{cmd: `\h`, desc: "show help"},
 	{cmd: `\l`, desc: "list available scripts"},
 	{cmd: `\s`, desc: "switch to the specified script"},
+	{cmd: `\r`, desc: "run the specified script"},
 	{cmd: `\c`, desc: "clean the terminal screen"},
 	{cmd: `\q`, desc: "to quit"},
 }
@@ -115,6 +116,8 @@ func (s *Shell) execCommand(cmd string) {
 		s.listCmd()
 	case "s":
 		s.switchCmd(cmd)
+	case "r":
+		s.runCmd(cmd)
 	case "c":
 		s.cleanCmd()
 	case "q":
@@ -151,6 +154,21 @@ func (s *Shell) switchCmd(cmd string) {
 	s.reader.SetPrompt(yellow(s.current) + blue(prompt))
 }
 
+func (s *Shell) runCmd(cmd string) {
+	fields := strings.Fields(cmd)
+	if len(fields) < 3 {
+		s.println("run script failed")
+		return
+	}
+	name := fields[1]
+	script, ok := s.scripts[name]
+	if !ok {
+		s.printf("script %q does not exists\n", name)
+		return
+	}
+	script.Run(script, fields[2:])
+}
+
 func (s *Shell) cleanCmd() {
 	cmd := exec.Command("clear")
 	cmd.Stdout = s.out
@@ -180,7 +198,7 @@ func (s *Shell) printf(format string, a ...interface{}) {
 func (s *Shell) autoCompleter() readline.AutoCompleter {
 	var pcs []readline.PrefixCompleterInterface
 	for _, cmd := range cmds {
-		if cmd.cmd == "\\s" {
+		if cmd.cmd == "\\s" || cmd.cmd == "\\r" {
 			var subs []readline.PrefixCompleterInterface
 			for _, name := range s.names {
 				subs = append(subs, readline.PcItem(name))

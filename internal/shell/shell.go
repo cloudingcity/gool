@@ -41,8 +41,13 @@ type Shell struct {
 	historyPath string
 	current     string
 	scripts     map[string]*cobra.Command
-	names       []string
+	infos       []info
 	quit        bool
+}
+
+type info struct {
+	name        string
+	description string
 }
 
 func New(in io.ReadCloser, out io.Writer) *Shell {
@@ -56,7 +61,11 @@ func New(in io.ReadCloser, out io.Writer) *Shell {
 func (s *Shell) Register(scripts ...*cobra.Command) {
 	for _, script := range scripts {
 		s.scripts[script.Name()] = script
-		s.names = append(s.names, script.Name())
+		info := info{
+			name:        script.Name(),
+			description: script.Short,
+		}
+		s.infos = append(s.infos, info)
 	}
 }
 
@@ -134,8 +143,8 @@ func (s *Shell) helpCmd() {
 
 func (s *Shell) listCmd() {
 	s.println("Scripts:")
-	for _, name := range s.names {
-		s.printf("  %s\n", yellow(name))
+	for _, info := range s.infos {
+		s.printf("  %-26s %s\n", yellow(info.name), info.description)
 	}
 }
 
@@ -200,8 +209,8 @@ func (s *Shell) autoCompleter() readline.AutoCompleter {
 	for _, cmd := range cmds {
 		if cmd.cmd == "\\s" || cmd.cmd == "\\r" {
 			var subs []readline.PrefixCompleterInterface
-			for _, name := range s.names {
-				subs = append(subs, readline.PcItem(name))
+			for _, info := range s.infos {
+				subs = append(subs, readline.PcItem(info.name))
 			}
 			pcs = append(pcs, readline.PcItem(cmd.cmd, subs...))
 		} else {

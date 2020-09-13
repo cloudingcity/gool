@@ -78,6 +78,8 @@ jwt-decode=#
 | md5                    | Computes the checksum                                                                                    |
 | url-encode             | Encode url                                                                                               |
 | url-decode             | Decode url                                                                                               |
+| base64-encode          | Base64 encode                                                                                            |
+| base64-decode          | Base64 decode                                                                                            |
 | rand-string            | Generate random string of given length (characters: a-z, A-Z, 0-9)                                       |
 | count                  | Get the characters length                                                                                |
 | camel-case             | Coverts string to [camel case](https://en.wikipedia.org/wiki/Camel_case)                                 |

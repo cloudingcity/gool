@@ -88,6 +88,7 @@ jwt-decode=#
 | snake-case             | Coverts string to [snake case](https://en.wikipedia.org/wiki/Snake_case)                                 |
 | start-case             | Coverts string to [start case](https://en.wikipedia.org/wiki/Letter_case#Stylistic_or_specialised_usage) |
 | upper-case             | Coverts string to upper case                                                                             |
+| format-json            | Cleans and format JSON                                                                                   |
 
 ## Library
 

@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/cloudingcity/gool/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudingcity/gool)
 [![Go Report Card](https://goreportcard.com/badge/github.com/cloudingcity/gool)](https://goreportcard.com/report/github.com/cloudingcity/gool)
 
-A toolkit make your programmer life easier.
+📦 A toolkit make your programmer life easier.
 
 > Inspired by [Boop](https://github.com/IvanMathy/Boop)
 

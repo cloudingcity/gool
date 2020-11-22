@@ -7,6 +7,6 @@ jobs:
       - name: Fetch Repository
         uses: actions/checkout@v2
       - name: Run Golint
-        uses: golangci/golangci-lint-action@v1
+        uses: golangci/golangci-lint-action@v2
         with:
           version: v1.30

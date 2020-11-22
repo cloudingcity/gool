@@ -78,6 +78,7 @@ jwt-decode=#
 | md5                    | Computes the checksum                                                                                    |
 | url-encode             | Encode url                                                                                               |
 | url-decode             | Decode url                                                                                               |
+| url-to-json            | Convert url to JSON                                                                                      |
 | base64-encode          | Base64 encode                                                                                            |
 | base64-decode          | Base64 decode                                                                                            |
 | rand-string            | Generate random string of given length (characters: a-z, A-Z, 0-9)                                       |

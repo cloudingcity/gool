@@ -7,7 +7,7 @@ import (
 )
 
 func TestURL_ToJSON(t *testing.T) {
-	want := "{\"schema\":\"https\",\"host\":\"github.com\",\"path\":\"/cloudingcity/gool\",\"query\":{\"a\":\"1\",\"b\":\"2\"}}"
+	want := `{"schema":"https","host":"github.com","path":"/cloudingcity/gool","query":{"a":"1","b":"2"}}`
 	u := &URL{
 		Scheme: "https",
 		Host:   "github.com",

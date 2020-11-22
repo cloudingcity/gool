@@ -23,11 +23,9 @@ func Parse(rawURL string) (*URL, error) {
 		return nil, err
 	}
 
-	q := make(map[string]string)
-	if u.RawQuery != "" {
-		for param, val := range u.Query() {
-			q[param] = val[0]
-		}
+	q := make(map[string]string, len(u.Query()))
+	for param, val := range u.Query() {
+		q[param] = val[0]
 	}
 
 	return &URL{

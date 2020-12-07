@@ -14,12 +14,12 @@ func Decode(token string) (string, error) {
 		return "", errors.New("jwt decode: invalid JWT structure")
 	}
 
-	header, err := base64.RawStdEncoding.DecodeString(s[0])
+	header, err := base64.RawURLEncoding.DecodeString(s[0])
 	if err != nil {
 		return "", errors.New("jwt decode: base64 decode header failed")
 	}
 
-	payload, err := base64.RawStdEncoding.DecodeString(s[1])
+	payload, err := base64.RawURLEncoding.DecodeString(s[1])
 	if err != nil {
 		return "", errors.New("jwt decode: base64 decode payload failed")
 	}

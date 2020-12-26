@@ -22,6 +22,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "livekn",
+      "name": "Toby Lam",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/164212?v=4",
+      "profile": "https://letme.rocks",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

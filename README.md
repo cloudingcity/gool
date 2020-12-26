@@ -127,6 +127,7 @@ func main() {
 <table>
   <tr>
     <td align="center"><a href="https://clouding.city"><img src="https://avatars3.githubusercontent.com/u/11569651?v=4" width="100px;" alt=""/><br /><sub><b>Clouding</b></sub></a><br /><a href="https://github.com/cloudingcity/gool/commits?author=cloudingcity" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/leozhantw"><img src="https://avatars2.githubusercontent.com/u/14068118?v=4" width="100px;" alt=""/><br /><sub><b>LeoZhan</b></sub></a><br /><a href="https://github.com/cloudingcity/gool/commits?author=leozhantw" title="Code">💻</a></td>
   </tr>
 </table>
 

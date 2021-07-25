@@ -9,7 +9,7 @@ import (
 
 var CamelCaseCmd = &cobra.Command{
 	Use:                   "camel-case [text]",
-	Short:                 "Coverts string to camel case",
+	Short:                 "Coverts string to camel case (fooBar)",
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -19,7 +19,7 @@ var CamelCaseCmd = &cobra.Command{
 
 var KebabCaseCmd = &cobra.Command{
 	Use:                   "kebab-case [text]",
-	Short:                 "Coverts string to kebab case",
+	Short:                 "Coverts string to kebab case (foo-bar)",
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -29,7 +29,7 @@ var KebabCaseCmd = &cobra.Command{
 
 var LowerCaseCmd = &cobra.Command{
 	Use:                   "lower-case [text]",
-	Short:                 "Coverts string to lower case",
+	Short:                 "Coverts string to lower case (foo bar)",
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -39,7 +39,7 @@ var LowerCaseCmd = &cobra.Command{
 
 var SnakeCaseCmd = &cobra.Command{
 	Use:                   "snake-case [text]",
-	Short:                 "Coverts string to snake case",
+	Short:                 "Coverts string to snake case (foo_bar)",
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -49,7 +49,7 @@ var SnakeCaseCmd = &cobra.Command{
 
 var StartCaseCmd = &cobra.Command{
 	Use:                   "start-case [text]",
-	Short:                 "Coverts string to start case",
+	Short:                 "Coverts string to start case (Foo Bar)",
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -59,7 +59,7 @@ var StartCaseCmd = &cobra.Command{
 
 var UpperCaseCmd = &cobra.Command{
 	Use:                   "upper-case [text]",
-	Short:                 "Coverts string to upper case",
+	Short:                 "Coverts string to upper case (FOO BAR)",
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {

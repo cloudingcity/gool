@@ -1,6 +1,6 @@
 module github.com/cloudingcity/gool
 
-go 1.15
+go 1.16
 
 require (
 	github.com/araddon/dateparse v0.0.0-20200409225146-d820a6159ab1

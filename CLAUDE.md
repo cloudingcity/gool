@@ -43,6 +43,13 @@ Gool is a Go-based CLI toolkit for common developer tasks like string transforma
 - `github.com/araddon/dateparse` - Flexible date parsing
 - `github.com/tidwall/pretty` - JSON formatting
 
+### Cobra Command Structure
+The application uses Cobra for CLI management with these patterns:
+- **Default Command**: When no subcommand is specified, the root command can have a `Run` function to provide default behavior (e.g., starting shell mode)
+- **Command Registration**: All commands are registered in `cmd/root.go` using `rootCmd.AddCommand()`
+- **Argument Validation**: Commands use Cobra's built-in validators like `MinimumNArgs`, `ExactArgs`, etc.
+- **Flag Handling**: Supports both local flags (specific to a command) and persistent flags (inherited by subcommands)
+
 ## Shell Mode
 The interactive shell (`gool shell`) provides:
 - Command history and autocomplete

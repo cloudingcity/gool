@@ -5,6 +5,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+
+	"github.com/cloudingcity/gool/internal/shell"
 )
 
 var rootCmd = &cobra.Command{
@@ -12,6 +14,12 @@ var rootCmd = &cobra.Command{
 	Short:         "Gool make your life easier",
 	SilenceErrors: true,
 	SilenceUsage:  true,
+	Run: func(cmd *cobra.Command, args []string) {
+		shell := shell.New(os.Stdin, os.Stdout)
+		shell.Register(commands()...)
+		shell.SetHistoryPath(os.TempDir())
+		shell.Run()
+	},
 }
 
 func Execute() {
@@ -23,7 +31,6 @@ func Execute() {
 
 func init() {
 	cobra.EnableCommandSorting = false
-	rootCmd.AddCommand(shellCmd)
 	rootCmd.AddCommand(commands()...)
 	rootCmd.AddCommand(versionCmd)
 }

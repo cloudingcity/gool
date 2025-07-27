@@ -18,7 +18,6 @@ const prompt = "=# "
 var (
 	cyan   = color.RGB(1, 173, 216).SprintfFunc()
 	blue   = color.New(color.FgHiBlue).SprintfFunc()
-	green  = color.New(color.FgGreen).SprintFunc()
 	yellow = color.New(color.FgYellow).SprintfFunc()
 	white  = color.RGB(255, 255, 255).SprintfFunc()
 )

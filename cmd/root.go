@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -9,7 +8,7 @@ import (
 	"github.com/cloudingcity/gool/internal/shell"
 )
 
-var rootCmd = &cobra.Command{
+var Root = &cobra.Command{
 	Use:           "gool",
 	Short:         "Gool make your life easier",
 	SilenceErrors: true,
@@ -22,17 +21,9 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-func Execute() {
-	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-}
-
 func init() {
 	cobra.EnableCommandSorting = false
-	rootCmd.AddCommand(commands()...)
-	rootCmd.AddCommand(versionCmd)
+	Root.AddCommand(commands()...)
 }
 
 func commands() []*cobra.Command {

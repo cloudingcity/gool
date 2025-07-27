@@ -1,18 +1,20 @@
 package main
 
 import (
-	"time"
+	"fmt"
+	"os"
 
 	"github.com/cloudingcity/gool/cmd"
 )
 
 var (
 	version = "dev"
-	date    = ""
 )
 
 func main() {
-	cmd.Version = version
-	cmd.Date, _ = time.Parse(time.RFC3339, date)
-	cmd.Execute()
+	cmd.Root.Version = version
+	if err := cmd.Root.Execute(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 }

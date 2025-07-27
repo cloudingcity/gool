@@ -4,9 +4,11 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch Repository
-        uses: actions/checkout@v2
-      - name: Run Golint
-        uses: golangci/golangci-lint-action@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
         with:
-          version: v1.30
+          go-version: stable
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v8
+        with:
+          version: v2.1

@@ -1,2 +1,4 @@
 coverage.txt
 .claude
+# Added by goreleaser init:
+dist/

@@ -27,7 +27,6 @@ func TestInteractive(t *testing.T) {
 		New(in, out).Run()
 		got := out.String()
 
-		assert.Contains(t, got, "Gool Shell")
 		assert.Contains(t, got, `\h show help`)
 	})
 

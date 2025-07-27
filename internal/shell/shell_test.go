@@ -3,7 +3,7 @@ package shell
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"testing"
 
 	"github.com/spf13/cobra"
@@ -22,7 +22,7 @@ var (
 
 func TestInteractive(t *testing.T) {
 	t.Run("startup message", func(t *testing.T) {
-		in := ioutil.NopCloser(&bytes.Buffer{})
+		in := io.NopCloser(&bytes.Buffer{})
 		out := &bytes.Buffer{}
 		New(in, out).Run()
 		got := out.String()
@@ -32,7 +32,7 @@ func TestInteractive(t *testing.T) {
 	})
 
 	t.Run("enter \\h", func(t *testing.T) {
-		in := ioutil.NopCloser(bytes.NewBufferString("\\h\n"))
+		in := io.NopCloser(bytes.NewBufferString("\\h\n"))
 		out := &bytes.Buffer{}
 		New(in, out).Run()
 		got := out.String()
@@ -45,7 +45,7 @@ func TestInteractive(t *testing.T) {
 	})
 
 	t.Run("enter \\l", func(t *testing.T) {
-		in := ioutil.NopCloser(bytes.NewBufferString("\\l\n"))
+		in := io.NopCloser(bytes.NewBufferString("\\l\n"))
 		out := &bytes.Buffer{}
 		shell := New(in, out)
 		shell.Register(fakeCmd)
@@ -58,7 +58,7 @@ func TestInteractive(t *testing.T) {
 
 	t.Run("enter \\s", func(t *testing.T) {
 		t.Run("without script", func(t *testing.T) {
-			in := ioutil.NopCloser(bytes.NewBufferString("\\s\n"))
+			in := io.NopCloser(bytes.NewBufferString("\\s\n"))
 			out := &bytes.Buffer{}
 			New(in, out).Run()
 			got := out.String()
@@ -66,7 +66,7 @@ func TestInteractive(t *testing.T) {
 			assert.Contains(t, got, "no script given")
 		})
 		t.Run("script not found", func(t *testing.T) {
-			in := ioutil.NopCloser(bytes.NewBufferString("\\s not-exists\n"))
+			in := io.NopCloser(bytes.NewBufferString("\\s not-exists\n"))
 			out := &bytes.Buffer{}
 			New(in, out).Run()
 			got := out.String()
@@ -74,7 +74,7 @@ func TestInteractive(t *testing.T) {
 			assert.Contains(t, got, `script "not-exists" does not exists`)
 		})
 		t.Run("exec script", func(t *testing.T) {
-			in := ioutil.NopCloser(bytes.NewBufferString("\\s fake\nenter something\n"))
+			in := io.NopCloser(bytes.NewBufferString("\\s fake\nenter something\n"))
 			out := &bytes.Buffer{}
 			shell := New(in, out)
 			shell.Register(fakeCmd)
@@ -87,7 +87,7 @@ func TestInteractive(t *testing.T) {
 
 	t.Run("enter \\r", func(t *testing.T) {
 		t.Run("without script", func(t *testing.T) {
-			in := ioutil.NopCloser(bytes.NewBufferString("\\r\n"))
+			in := io.NopCloser(bytes.NewBufferString("\\r\n"))
 			out := &bytes.Buffer{}
 			New(in, out).Run()
 			got := out.String()
@@ -95,7 +95,7 @@ func TestInteractive(t *testing.T) {
 			assert.Contains(t, got, "run script failed")
 		})
 		t.Run("script not found", func(t *testing.T) {
-			in := ioutil.NopCloser(bytes.NewBufferString("\\r not-exists-script foo\n"))
+			in := io.NopCloser(bytes.NewBufferString("\\r not-exists-script foo\n"))
 			out := &bytes.Buffer{}
 			New(in, out).Run()
 			got := out.String()
@@ -103,7 +103,7 @@ func TestInteractive(t *testing.T) {
 			assert.Contains(t, got, `script "not-exists-script" does not exists`)
 		})
 		t.Run("exec script", func(t *testing.T) {
-			in := ioutil.NopCloser(bytes.NewBufferString("\\r fake enter something\n"))
+			in := io.NopCloser(bytes.NewBufferString("\\r fake enter something\n"))
 			out := &bytes.Buffer{}
 			shell := New(in, out)
 			shell.Register(fakeCmd)
@@ -115,7 +115,7 @@ func TestInteractive(t *testing.T) {
 	})
 
 	t.Run("enter \\q", func(t *testing.T) {
-		in := ioutil.NopCloser(bytes.NewBufferString("\\q\n"))
+		in := io.NopCloser(bytes.NewBufferString("\\q\n"))
 		out := &bytes.Buffer{}
 		New(in, out).Run()
 		got := out.String()

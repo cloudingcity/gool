@@ -1,6 +1,7 @@
 package shell
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"os/exec"
@@ -13,25 +14,24 @@ import (
 
 const prompt = "=# "
 
+// color definitions
 var (
-	cyan   = color.New(color.FgCyan).SprintfFunc()
+	cyan   = color.RGB(1, 173, 216).SprintfFunc()
 	blue   = color.New(color.FgHiBlue).SprintfFunc()
 	green  = color.New(color.FgGreen).SprintFunc()
 	yellow = color.New(color.FgYellow).SprintfFunc()
+	white  = color.RGB(255, 255, 255).SprintfFunc()
 )
 
 type cmd struct {
-	cmd  string
+	name string
 	desc string
 }
 
-var cmds = []cmd{
-	{cmd: `\h`, desc: "show help"},
-	{cmd: `\l`, desc: "list available scripts"},
-	{cmd: `\s`, desc: "switch to the specified script"},
-	{cmd: `\r`, desc: "run the specified script"},
-	{cmd: `\c`, desc: "clean the terminal screen"},
-	{cmd: `\q`, desc: "to quit"},
+var basicCmds = []cmd{
+	{name: "/help", desc: "Show help"},
+	{name: "/clear", desc: "Clean the screen"},
+	{name: "/quit", desc: "Quit the REPL"},
 }
 
 type Shell struct {
@@ -40,32 +40,27 @@ type Shell struct {
 	reader      *readline.Instance
 	historyPath string
 	current     string
-	scripts     map[string]*cobra.Command
-	infos       []info
+	mCmds       map[string]*cobra.Command
+	cmds        []cmd
 	quit        bool
-}
-
-type info struct {
-	name        string
-	description string
 }
 
 func New(in io.ReadCloser, out io.Writer) *Shell {
 	return &Shell{
-		in:      in,
-		out:     out,
-		scripts: make(map[string]*cobra.Command),
+		in:    in,
+		out:   out,
+		mCmds: make(map[string]*cobra.Command),
 	}
 }
 
-func (s *Shell) Register(scripts ...*cobra.Command) {
-	for _, script := range scripts {
-		s.scripts[script.Name()] = script
-		info := info{
-			name:        script.Name(),
-			description: script.Short,
+func (s *Shell) Register(cobraCmd ...*cobra.Command) {
+	for _, c := range cobraCmd {
+		s.mCmds[c.Name()] = c
+		cmd := cmd{
+			name: "/" + c.Name(),
+			desc: c.Short,
 		}
-		s.infos = append(s.infos, info)
+		s.cmds = append(s.cmds, cmd)
 	}
 }
 
@@ -81,7 +76,7 @@ func (s *Shell) Run() {
 
 	for {
 		line, err := s.reader.Readline()
-		if err == readline.ErrInterrupt {
+		if errors.Is(err, readline.ErrInterrupt) {
 			if len(line) == 0 {
 				break
 			} else {
@@ -108,80 +103,56 @@ func (s *Shell) welcome() {
 ██│  ███┐██│   ██│██│   ██│██│     
 ██│   ██│██│   ██│██│   ██│██│     
 └██████┌┘└██████┌┘└██████┌┘███████┐
- └─────┘  └─────┘  └─────┘ └──────┘`))
-	s.println(cmds[0].cmd, cmds[0].desc)
+ └─────┘  └─────┘  └─────┘ └──────┘
+`))
+	s.printf(" %s %s\n\n", white("/help"), "for more information")
 }
 
 func (s *Shell) exec(input string) {
-	if input == "" {
+	if strings.HasPrefix(input, "/") {
+		cmd := strings.TrimPrefix(input, "/")
+		s.execCommand(cmd)
 		return
 	}
-	if strings.HasPrefix(input, `\`) && len(input) >= 2 {
-		s.execCommand(input)
-		return
-	}
-	s.execScript(input)
+	s.execCommandWith(input)
 }
 
 func (s *Shell) execCommand(cmd string) {
-	switch cmd[1:2] {
-	case "h":
+	switch cmd {
+	case "help":
 		s.helpCmd()
-	case "l":
-		s.listCmd()
-	case "s":
-		s.switchCmd(cmd)
-	case "r":
-		s.runCmd(cmd)
-	case "c":
+	case "clear":
 		s.cleanCmd()
-	case "q":
+	case "quit":
 		s.quitCmd()
+	default:
+		if _, ok := s.mCmds[cmd]; ok {
+			s.switchCmd(cmd)
+		} else {
+			s.execCommandWith(cmd)
+		}
 	}
 }
 
 func (s *Shell) helpCmd() {
-	s.println("Commands:")
-	for _, cmd := range cmds {
-		s.printf("  %s %s\n", green(cmd.cmd), yellow(cmd.desc))
+	s.println()
+	s.println("Basics:")
+	for _, cmd := range basicCmds {
+		s.printf(" %s - %s\n", white(cmd.name), cmd.desc)
 	}
-}
 
-func (s *Shell) listCmd() {
-	s.println("Scripts:")
-	for _, info := range s.infos {
-		s.printf("  %-26s %s\n", yellow(info.name), info.description)
+	s.println()
+
+	s.println("Commands:")
+	for _, cmd := range s.cmds {
+		s.printf(" %s - %s\n", white(cmd.name), cmd.desc)
 	}
+	s.println()
 }
 
 func (s *Shell) switchCmd(cmd string) {
-	fields := strings.Fields(cmd)
-	if len(fields) < 2 {
-		s.println("no script given")
-		return
-	}
-	script := fields[1]
-	if _, ok := s.scripts[script]; !ok {
-		s.printf("script %q does not exists\n", script)
-		return
-	}
-	s.current = script
+	s.current = cmd
 	s.reader.SetPrompt(yellow(s.current) + blue(prompt))
-}
-
-func (s *Shell) runCmd(cmd string) {
-	fields := strings.Fields(cmd)
-	if len(fields) < 3 {
-		s.println("run script failed")
-		return
-	}
-	name := fields[1]
-	script, ok := s.scripts[name]
-	if !ok {
-		s.printf("script %q does not exists\n", name)
-		return
-	}
-	script.Run(script, fields[2:])
 }
 
 func (s *Shell) cleanCmd() {
@@ -194,12 +165,12 @@ func (s *Shell) quitCmd() {
 	s.quit = true
 }
 
-func (s *Shell) execScript(input string) {
+func (s *Shell) execCommandWith(input string) {
 	if s.current == "" {
 		return
 	}
-	script := s.scripts[s.current]
-	script.Run(script, []string{input})
+	cmd := s.mCmds[s.current]
+	cmd.Run(cmd, []string{input})
 }
 
 func (s *Shell) println(a ...interface{}) {
@@ -212,16 +183,12 @@ func (s *Shell) printf(format string, a ...interface{}) {
 
 func (s *Shell) autoCompleter() readline.AutoCompleter {
 	var pcs []readline.PrefixCompleterInterface
-	for _, cmd := range cmds {
-		if cmd.cmd == "\\s" || cmd.cmd == "\\r" {
-			var subs []readline.PrefixCompleterInterface
-			for _, info := range s.infos {
-				subs = append(subs, readline.PcItem(info.name))
-			}
-			pcs = append(pcs, readline.PcItem(cmd.cmd, subs...))
-		} else {
-			pcs = append(pcs, readline.PcItem(cmd.cmd))
-		}
+
+	for _, cmd := range basicCmds {
+		pcs = append(pcs, readline.PcItem(cmd.name))
+	}
+	for _, cmd := range s.cmds {
+		pcs = append(pcs, readline.PcItem(cmd.name))
 	}
 	return readline.NewPrefixCompleter(pcs...)
 }

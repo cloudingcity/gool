@@ -19,13 +19,40 @@
 brew install cloudingcity/tap/gool
 ```
 
-### Docker
+## Usage
+
+### Interactive Shell
 
 ```shell script
-docker run --rm -it ghost0436/gool
+$ gool 
+
+ ██████┐  ██████┐  ██████┐ ██┐
+██┌────┘ ██┌───██┐██┌───██┐██│
+██│  ███┐██│   ██│██│   ██│██│
+██│   ██│██│   ██│██│   ██│██│
+└██████┌┘└██████┌┘└██████┌┘███████┐
+ └─────┘  └─────┘  └─────┘ └──────┘
+
+ /help for more information
+
+=# /jwt-decode
+jwt-decode=# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+{
+  "header": {
+    "alg": "HS256",
+    "typ": "JWT"
+  },
+  "payload": {
+    "sub": "1234567890",
+    "name": "John Doe",
+    "iat": 1516239022
+  },
+  "signature": "SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+}
+jwt-decode=#
 ```
 
-## Usage
+### Direct CLI
 
 ```shell script
 $ gool jwt-decode eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
@@ -43,52 +70,28 @@ $ gool jwt-decode eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwI
 }
 ```
 
-### Gool Shell
+## Commands
 
-```shell script
-$ gool shell 
-Gool Shell
-\h: show help
-=# \s jwt-decode
-jwt-decode=# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-{
-  "header": {
-    "alg": "HS256",
-    "typ": "JWT"
-  },
-  "payload": {
-    "sub": "1234567890",
-    "name": "John Doe",
-    "iat": 1516239022
-  },
-  "signature": "SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
-}
-jwt-decode=#
-```
-
-
-## Scripts
-
-| Script                 | Description                                                                                              |
-|------------------------|----------------------------------------------------------------------------------------------------------|
-| timestamp-to-date, t2d | Covert unix timestamp to date                                                                            |
-| date-to-timestamp, d2t | Covert date to unix timestamp                                                                            |
-| jwt-decode             | Decode [JWT](https://jwt.io/)                                                                            |
-| md5                    | Computes the checksum                                                                                    |
-| url-encode             | Encode url                                                                                               |
-| url-decode             | Decode url                                                                                               |
-| url-to-json            | Convert url to JSON                                                                                      |
-| base64-encode          | Base64 encode                                                                                            |
-| base64-decode          | Base64 decode                                                                                            |
-| rand-string            | Generate random string of given length (characters: a-z, A-Z, 0-9)                                       |
-| count                  | Get the characters length                                                                                |
-| camel-case             | Coverts string to [camel case](https://en.wikipedia.org/wiki/Camel_case)                                 |
-| kebab-case             | Coverts string to [kebab case](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles)            |
-| lower-case             | Coverts string to lower case                                                                             |
-| snake-case             | Coverts string to [snake case](https://en.wikipedia.org/wiki/Snake_case)                                 |
-| start-case             | Coverts string to [start case](https://en.wikipedia.org/wiki/Letter_case#Stylistic_or_specialised_usage) |
-| upper-case             | Coverts string to upper case                                                                             |
-| format-json            | Cleans and format JSON                                                                                   |
+| Command                | Description                                                                                                        |
+|------------------------|--------------------------------------------------------------------------------------------------------------------|
+| timestamp-to-date, t2d | Covert unix timestamp to date                                                                                      |
+| date-to-timestamp, d2t | Covert date to unix timestamp                                                                                      |
+| jwt-decode             | Decode [JWT](https://jwt.io/)                                                                                      |
+| md5                    | Computes the checksum                                                                                              |
+| url-encode             | Encode url                                                                                                         |
+| url-decode             | Decode url                                                                                                         |
+| url-to-json            | Convert url to JSON                                                                                                |
+| base64-encode          | Base64 encode                                                                                                      |
+| base64-decode          | Base64 decode                                                                                                      |
+| rand-string            | Generate random string of given length (characters: a-z, A-Z, 0-9)                                                 |
+| count                  | Get the characters length                                                                                          |
+| camel-case             | Coverts string to [camel case](https://en.wikipedia.org/wiki/Camel_case) (fooBar)                                  |
+| kebab-case             | Coverts string to [kebab case](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles) (foo-bar)            |
+| lower-case             | Coverts string to lower case (foo bar)                                                                             |
+| snake-case             | Coverts string to [snake case](https://en.wikipedia.org/wiki/Snake_case) (foo_bar)                                 |
+| start-case             | Coverts string to [start case](https://en.wikipedia.org/wiki/Letter_case#Stylistic_or_specialised_usage) (Foo Bar) |
+| upper-case             | Coverts string to upper case (FOO BAR)                                                                             |
+| format-json            | Cleans and format JSON                                                                                             |
 
 ## Library
 

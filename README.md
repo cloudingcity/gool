@@ -9,7 +9,7 @@
 
 > Inspired by [Boop](https://github.com/IvanMathy/Boop)
 
-![demo](https://user-images.githubusercontent.com/11569651/92252386-bd1c2c00-ef00-11ea-927b-8f6d752ba733.gif)
+![Kapture 2025-07-29 at 00 32 36](https://github.com/user-attachments/assets/2d752693-cff9-4a25-a852-ad1b44e3c36f)
 
 ## Installation
 

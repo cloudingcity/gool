@@ -25,6 +25,8 @@ builds:
 
 archives:
   - formats: [tar.gz]
+    files:
+      - none*
     # this name template makes the OS and Arch compatible with the results of `uname`.
     name_template: >-
       {{ .ProjectName }}_

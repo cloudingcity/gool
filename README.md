@@ -13,11 +13,32 @@
 
 ## Installation
 
+### Curl
+
+```bash
+# macOS Intel
+curl -L https://github.com/cloudingcity/gool/releases/latest/download/gool_Darwin_x86_64.tar.gz | tar xz && sudo mv gool /usr/local/bin/
+
+# macOS Apple Silicon  
+curl -L https://github.com/cloudingcity/gool/releases/latest/download/gool_Darwin_arm64.tar.gz | tar xz && sudo mv gool /usr/local/bin/
+
+# Linux x86_64
+curl -L https://github.com/cloudingcity/gool/releases/latest/download/gool_Linux_x86_64.tar.gz | tar xz && sudo mv gool /usr/local/bin/
+
+# Or for a specific version:
+curl -L https://github.com/cloudingcity/gool/releases/download/v1.0.0/gool_Darwin_x86_64.tar.gz | tar xz && sudo mv gool /usr/local/bin/
+```
+
 ### Homebrew
 
 ```shell script
 brew install --cask cloudingcity/tap/gool
 ```
+
+> **Note**: On macOS, you may see a security warning since the binary is not signed/notarized (I'm too poor for Apple's $99/year developer fee 💸). To bypass this:
+> 1. Go to System Preferences → Security & Privacy → General
+> 2. Click "Allow Anyway" next to the blocked app warning
+> 3. Or run: `sudo xattr -rd com.apple.quarantine /usr/local/bin/gool`
 
 ## Usage
 

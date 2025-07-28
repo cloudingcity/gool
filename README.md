@@ -13,20 +13,24 @@
 
 ## Installation
 
-### Curl
+### cURL
 
 ```bash
 # macOS Intel
-curl -L https://github.com/cloudingcity/gool/releases/latest/download/gool_Darwin_x86_64.tar.gz | tar xz && sudo mv gool /usr/local/bin/
+curl -L https://github.com/cloudingcity/gool/releases/latest/download/gool_Darwin_x86_64.tar.gz | \
+  tar xz && sudo mv gool /usr/local/bin/
 
 # macOS Apple Silicon  
-curl -L https://github.com/cloudingcity/gool/releases/latest/download/gool_Darwin_arm64.tar.gz | tar xz && sudo mv gool /usr/local/bin/
+curl -L https://github.com/cloudingcity/gool/releases/latest/download/gool_Darwin_arm64.tar.gz | \
+  tar xz && sudo mv gool /usr/local/bin/
 
 # Linux x86_64
-curl -L https://github.com/cloudingcity/gool/releases/latest/download/gool_Linux_x86_64.tar.gz | tar xz && sudo mv gool /usr/local/bin/
+curl -L https://github.com/cloudingcity/gool/releases/latest/download/gool_Linux_x86_64.tar.gz | \
+  tar xz && sudo mv gool /usr/local/bin/
 
 # Or for a specific version:
-curl -L https://github.com/cloudingcity/gool/releases/download/v1.0.0/gool_Darwin_x86_64.tar.gz | tar xz && sudo mv gool /usr/local/bin/
+curl -L https://github.com/cloudingcity/gool/releases/download/v1.0.0/gool_Darwin_x86_64.tar.gz | \
+  tar xz && sudo mv gool /usr/local/bin/
 ```
 
 ### Homebrew

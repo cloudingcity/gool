@@ -35,10 +35,10 @@ curl -L https://github.com/cloudingcity/gool/releases/download/v1.0.0/gool_Darwi
 brew install --cask cloudingcity/tap/gool
 ```
 
-> **Note**: On macOS, you may see a security warning since the binary is not signed/notarized (I'm too poor for Apple's $99/year developer fee 💸). To bypass this:
+> **Note**: On macOS, you may see a security warning since the binary is not signed/notarized (I'm too poor for Apple's $99/year developer fee 😭). To bypass this:
 > 1. Go to System Preferences → Security & Privacy → General
 > 2. Click "Allow Anyway" next to the blocked app warning
-> 3. Or run: `sudo xattr -rd com.apple.quarantine /usr/local/bin/gool`
+> 3. Or run: `sudo xattr -rd com.apple.quarantine /opt/homebrew/bin/gool`
 
 ## Usage
 

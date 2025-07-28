@@ -12,14 +12,15 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const prompt = "=# "
+const (
+	promptSymbol = " ❯ "
+	appName      = "ʕ◔ϖ◔ʔ"
+)
 
 // color definitions
 var (
-	cyan   = color.RGB(1, 173, 216).SprintfFunc()
-	blue   = color.New(color.FgHiBlue).SprintfFunc()
-	yellow = color.New(color.FgYellow).SprintfFunc()
-	white  = color.RGB(255, 255, 255).SprintfFunc()
+	cyan  = color.RGB(93, 201, 226).SprintfFunc() // Go primary brand color #00ADD8
+	white = color.RGB(255, 255, 255).SprintfFunc()
 )
 
 type cmd struct {
@@ -89,7 +90,7 @@ func (s *Shell) Run() {
 		s.exec(input)
 
 		if s.quit {
-			s.println("Good Bye!")
+			s.println(white("Good Bye!"))
 			break
 		}
 	}
@@ -151,7 +152,7 @@ func (s *Shell) helpCmd() {
 
 func (s *Shell) switchCmd(cmd string) {
 	s.current = cmd
-	s.reader.SetPrompt(yellow(s.current) + blue(prompt))
+	s.reader.SetPrompt(cyan(s.current) + white(promptSymbol))
 }
 
 func (s *Shell) cleanCmd() {

@@ -14,7 +14,7 @@ func newReader(in io.ReadCloser, out io.Writer, historyPath string, completer re
 		historyFile = filepath.Join(historyPath, "gool.tmp")
 	}
 	reader, err := readline.NewEx(&readline.Config{
-		Prompt:            blue(prompt),
+		Prompt:            cyan(appName) + white(promptSymbol),
 		HistoryFile:       historyFile,
 		HistorySearchFold: true,
 		AutoComplete:      completer,

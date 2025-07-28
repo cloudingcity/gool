@@ -15,6 +15,10 @@ import (
 const (
 	promptSymbol = " ❯ "
 	appName      = "ʕ◔ϖ◔ʔ"
+
+	helpCmd  = "help"
+	clearCmd = "clear"
+	quitCmd  = "quit"
 )
 
 // color definitions
@@ -29,9 +33,9 @@ type cmd struct {
 }
 
 var basicCmds = []cmd{
-	{name: "/help", desc: "Show help"},
-	{name: "/clear", desc: "Clean the screen"},
-	{name: "/quit", desc: "Quit the REPL"},
+	{name: "/" + helpCmd, desc: "Show help"},
+	{name: "/" + clearCmd, desc: "Clean the screen"},
+	{name: "/" + quitCmd, desc: "Quit the REPL"},
 }
 
 type Shell struct {
@@ -119,11 +123,11 @@ func (s *Shell) exec(input string) {
 
 func (s *Shell) execCommand(cmd string) {
 	switch cmd {
-	case "help":
+	case helpCmd:
 		s.helpCmd()
-	case "clear":
-		s.cleanCmd()
-	case "quit":
+	case clearCmd:
+		s.clearCmd()
+	case quitCmd:
 		s.quitCmd()
 	default:
 		if _, ok := s.mCmds[cmd]; ok {
@@ -155,7 +159,7 @@ func (s *Shell) switchCmd(cmd string) {
 	s.reader.SetPrompt(cyan(s.current) + white(promptSymbol))
 }
 
-func (s *Shell) cleanCmd() {
+func (s *Shell) clearCmd() {
 	cmd := exec.Command("clear")
 	cmd.Stdout = s.out
 	_ = cmd.Run()
@@ -173,11 +177,11 @@ func (s *Shell) execCommandWith(input string) {
 	cmd.Run(cmd, []string{input})
 }
 
-func (s *Shell) println(a ...interface{}) {
+func (s *Shell) println(a ...any) {
 	_, _ = fmt.Fprintln(s.out, a...)
 }
 
-func (s *Shell) printf(format string, a ...interface{}) {
+func (s *Shell) printf(format string, a ...any) {
 	_, _ = fmt.Fprintf(s.out, format, a...)
 }
 

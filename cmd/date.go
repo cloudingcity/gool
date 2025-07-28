@@ -5,8 +5,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/cloudingcity/gool/pkg/date"
 	"github.com/spf13/cobra"
+
+	"github.com/cloudingcity/gool/pkg/date"
 )
 
 var dateToTimestampCmd = &cobra.Command{
@@ -16,7 +17,7 @@ var dateToTimestampCmd = &cobra.Command{
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {
-		if strings.ToLower(args[0]) == "now" {
+		if strings.ToLower(args[0]) == "" {
 			fmt.Println(time.Now().Unix())
 			return
 		}

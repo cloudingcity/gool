@@ -16,7 +16,7 @@
 ### Homebrew
 
 ```shell script
-brew install cloudingcity/tap/gool
+brew install --cask cloudingcity/tap/gool
 ```
 
 ## Usage

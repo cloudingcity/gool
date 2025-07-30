@@ -117,7 +117,7 @@ $ gool jwt-decode eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwI
 | start-case             | Coverts string to [start case](https://en.wikipedia.org/wiki/Letter_case#Stylistic_or_specialised_usage) (Foo Bar) |
 | upper-case             | Coverts string to upper case (FOO BAR)                                                                             |
 | text-escape            | Escape quotes and backslashes in text                                                                              |
-| text-unescape          | Unescape quotes and backslashes in text                                                                            |
+| text-unescape          | Unescape quotes and backslashes in text (pretty prints JSON)                                                       |
 | format-json            | Cleans and format JSON                                                                                             |
 
 ## Library

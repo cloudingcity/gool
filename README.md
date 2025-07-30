@@ -116,6 +116,8 @@ $ gool jwt-decode eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwI
 | snake-case             | Coverts string to [snake case](https://en.wikipedia.org/wiki/Snake_case) (foo_bar)                                 |
 | start-case             | Coverts string to [start case](https://en.wikipedia.org/wiki/Letter_case#Stylistic_or_specialised_usage) (Foo Bar) |
 | upper-case             | Coverts string to upper case (FOO BAR)                                                                             |
+| text-escape            | Escape quotes and backslashes in text                                                                              |
+| text-unescape          | Unescape quotes and backslashes in text                                                                            |
 | format-json            | Cleans and format JSON                                                                                             |
 
 ## Library
@@ -128,6 +130,7 @@ import (
 
 	"github.com/cloudingcity/gool/pkg/cases"
 	"github.com/cloudingcity/gool/pkg/date"
+	"github.com/cloudingcity/gool/pkg/text"
 	"github.com/cloudingcity/gool/pkg/timestamp"
 )
 
@@ -143,6 +146,12 @@ func main() {
 	
 	fmt.Println(timestamp.ToDate(1598918400))
 	// 2020-09-01 08:00:00 +0800 CST
+
+	fmt.Println(text.Escape(`{"key": "say "value""}`))
+	// {\"key\": \"say \"value\"\"}
+
+	fmt.Println(text.Unescape(`{\"key\": \"say \"value\"\"}`))
+	// {"key": "say "value""}
 }
 ```
 

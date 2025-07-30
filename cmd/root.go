@@ -45,6 +45,8 @@ func commands() []*cobra.Command {
 		SnakeCaseCmd,
 		StartCaseCmd,
 		UpperCaseCmd,
+		textEscapeCmd,
+		textUnescapeCmd,
 		formatJSONCmd,
 	}
 }

@@ -108,7 +108,6 @@ $ gool jwt-decode eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwI
 | url-to-json            | Convert url to JSON                                                                                                |
 | base64-encode          | Base64 encode                                                                                                      |
 | base64-decode          | Base64 decode                                                                                                      |
-| rand-string            | Generate random string of given length (characters: a-z, A-Z, 0-9)                                                 |
 | uuid                   | Generate UUID v4 (default: 1)                                                                                      |
 | count                  | Get the characters length                                                                                          |
 | camel-case             | Coverts string to [camel case](https://en.wikipedia.org/wiki/Camel_case) (fooBar)                                  |

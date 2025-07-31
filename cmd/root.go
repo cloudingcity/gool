@@ -37,7 +37,6 @@ func commands() []*cobra.Command {
 		urlToJSON,
 		base64EncodeCmd,
 		base64DecodeCmd,
-		randStringCmd,
 		uuidCmd,
 		countCmd,
 		CamelCaseCmd,

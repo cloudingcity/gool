@@ -72,7 +72,7 @@ The tool provides utilities for:
 - **Date/Time**: timestamp-to-date, date-to-timestamp  
 - **Encoding**: base64-encode/decode, url-encode/decode, jwt-decode
 - **Text Processing**: case conversions (camel, kebab, snake, etc.), count, text-escape, text-unescape
-- **Utilities**: md5, rand-string, uuid, format-json, url-to-json
+- **Utilities**: md5, uuid, format-json, url-to-json
 
 ## Key Dependencies
 

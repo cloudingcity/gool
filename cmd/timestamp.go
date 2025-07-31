@@ -13,11 +13,11 @@ import (
 var timestampToDateCmd = &cobra.Command{
 	Use:                   "timestamp-to-date [timestamp]",
 	Aliases:               []string{"t2d"},
-	Short:                 "Covert unix timestamp to date",
-	Args:                  cobra.ExactArgs(1),
+	Short:                 "Covert unix timestamp to date (default: current time)",
+	Args:                  cobra.MaximumNArgs(1),
 	DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {
-		if args[0] == "" {
+		if len(args) == 0 || args[0] == "" {
 			fmt.Println(time.Now().Format(time.RFC3339))
 			return
 		}

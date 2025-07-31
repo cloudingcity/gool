@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/spf13/cobra"
@@ -13,11 +12,11 @@ import (
 var dateToTimestampCmd = &cobra.Command{
 	Use:                   "date-to-timestamp [date]",
 	Aliases:               []string{"d2t"},
-	Short:                 "Covert date to unix timestamp",
-	Args:                  cobra.ExactArgs(1),
+	Short:                 "Covert date to unix timestamp (default: current time)",
+	Args:                  cobra.MaximumNArgs(1),
 	DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {
-		if strings.ToLower(args[0]) == "" {
+		if len(args) == 0 || args[0] == "" {
 			fmt.Println(time.Now().Unix())
 			return
 		}

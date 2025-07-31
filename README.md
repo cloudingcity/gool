@@ -99,8 +99,8 @@ $ gool jwt-decode eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwI
 
 | Command                | Description                                                                                                        |
 |------------------------|--------------------------------------------------------------------------------------------------------------------|
-| timestamp-to-date, t2d | Covert unix timestamp to date                                                                                      |
-| date-to-timestamp, d2t | Covert date to unix timestamp                                                                                      |
+| timestamp-to-date, t2d | Covert unix timestamp to date (default: current time)                                                              |
+| date-to-timestamp, d2t | Covert date to unix timestamp (default: current time)                                                              |
 | jwt-decode             | Decode [JWT](https://jwt.io/)                                                                                      |
 | md5                    | Computes the checksum                                                                                              |
 | url-encode             | Encode url                                                                                                         |
@@ -109,7 +109,7 @@ $ gool jwt-decode eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwI
 | base64-encode          | Base64 encode                                                                                                      |
 | base64-decode          | Base64 decode                                                                                                      |
 | rand-string            | Generate random string of given length (characters: a-z, A-Z, 0-9)                                                 |
-| uuid                   | Generate UUID v4 (default: 1)                                                                                     |
+| uuid                   | Generate UUID v4 (default: 1)                                                                                      |
 | count                  | Get the characters length                                                                                          |
 | camel-case             | Coverts string to [camel case](https://en.wikipedia.org/wiki/Camel_case) (fooBar)                                  |
 | kebab-case             | Coverts string to [kebab case](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles) (foo-bar)            |

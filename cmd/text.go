@@ -12,7 +12,7 @@ import (
 
 var textEscapeCmd = &cobra.Command{
 	Use:                   "text-escape [text]",
-	Short:                 "Escape quotes and backslashes in text (for JSON strings)",
+	Short:                 "Escape quotes and backslashes in text",
 	Args:                  cobra.ExactArgs(1),
 	DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {

@@ -85,3 +85,7 @@ The tool provides utilities for:
 ## Maintenance Tasks
 
 - **Update README.md or CLAUDE.md if necessary**
+
+## Development Reminders
+
+- Ensure make lint is not failed

@@ -11,8 +11,7 @@ import (
 )
 
 var timestampToDateCmd = &cobra.Command{
-	Use:                   "timestamp-to-date [timestamp]",
-	Aliases:               []string{"t2d"},
+	Use:                   "ts2date [timestamp]",
 	Short:                 "Covert unix timestamp to date (default: current time)",
 	Args:                  cobra.MaximumNArgs(1),
 	DisableFlagsInUseLine: true,

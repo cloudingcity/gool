@@ -69,7 +69,7 @@ go test -v ./internal/shell/  # Test shell functionality
 ## Available Commands
 
 The tool provides utilities for:
-- **Date/Time**: tsconv (smart timestamp/date converter), timestamp-to-date, date-to-timestamp  
+- **Date/Time**: tsconv (smart timestamp/date converter), ts2date, date2ts  
 - **Encoding**: base64-encode/decode, url-encode/decode, jwt-decode
 - **Text Processing**: case conversions (camel, kebab, snake, etc.), count, text-escape, text-unescape
 - **Utilities**: md5, uuid, format-json, url-to-json

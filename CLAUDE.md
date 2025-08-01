@@ -69,10 +69,22 @@ go test -v ./internal/shell/  # Test shell functionality
 ## Available Commands
 
 The tool provides utilities for:
-- **Date/Time**: timestamp-to-date, date-to-timestamp  
+- **Date/Time**: tsconv (smart timestamp/date converter), timestamp-to-date, date-to-timestamp  
 - **Encoding**: base64-encode/decode, url-encode/decode, jwt-decode
 - **Text Processing**: case conversions (camel, kebab, snake, etc.), count, text-escape, text-unescape
 - **Utilities**: md5, uuid, format-json, url-to-json
+
+### tsconv Command
+The `tsconv` command intelligently converts between timestamps and dates:
+- **No input**: Shows current time as both timestamp and date
+- **Timestamp input**: Converts Unix timestamp (seconds) to RFC3339 date format
+- **Date input**: Converts date string to Unix timestamp (seconds)
+- **Examples**:
+  ```bash
+  gool tsconv                    # Show current time
+  gool tsconv 1609459200         # Convert timestamp to date
+  gool tsconv "2021-01-01"       # Convert date to timestamp
+  ```
 
 ## Key Dependencies
 

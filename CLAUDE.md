@@ -35,8 +35,9 @@ Commands are implemented using the Cobra CLI framework. Each command:
 The interactive shell (`internal/shell/`) provides:
 - Command auto-completion with `/` prefix
 - Command switching (e.g., `/jwt-decode` switches to JWT decode mode)
+- Direct command execution without mode switching (e.g., `/run uuid 5`)
 - History management with temp directory storage
-- Built-in commands: `/help`, `/clear`, `/quit`
+- Built-in commands: `/help`, `/run`, `/clear`, `/quit`
 
 ## Development Commands
 
@@ -96,6 +97,21 @@ The `mstsconv` command works with millisecond timestamps:
   gool mstsconv                  # Show current time
   gool mstsconv 1609459200000    # Convert MS timestamp to date
   gool mstsconv "2021-01-01"     # Convert date to MS timestamp
+  ```
+
+### /run Command (Interactive Shell Only)
+The `/run` command allows direct execution of any command without switching modes in the interactive shell:
+- **Syntax**: `/run <command> [args...]`
+- **Auto-completion**: Tab completion works for both command names and arguments
+- **No mode switching**: Commands execute immediately and return to main prompt
+- **Help**: Use `/run` without arguments to see available commands
+- **Examples**:
+  ```bash
+  /run uuid 5                    # Generate 5 UUIDs
+  /run md5 hello                 # Compute MD5 hash of "hello"
+  /run tsconv 1609459200         # Convert timestamp to date
+  /run camel-case hello_world    # Convert to camelCase
+  /run base64-encode "text"      # Base64 encode text
   ```
 
 ## Key Dependencies

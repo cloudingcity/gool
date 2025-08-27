@@ -17,6 +17,7 @@ const (
 	appName      = "ʕ◔ϖ◔ʔ"
 
 	helpCmd  = "help"
+	runCmd   = "run"
 	clearCmd = "clear"
 	quitCmd  = "quit"
 )
@@ -34,6 +35,7 @@ type cmd struct {
 
 var basicCmds = []cmd{
 	{name: "/" + helpCmd, desc: "Show help"},
+	{name: "/" + runCmd, desc: "Run command without switching mode"},
 	{name: "/" + clearCmd, desc: "Clean the screen"},
 	{name: "/" + quitCmd, desc: "Quit the REPL"},
 }
@@ -122,20 +124,52 @@ func (s *Shell) exec(input string) {
 }
 
 func (s *Shell) execCommand(cmd string) {
-	switch cmd {
+	parts := strings.Fields(cmd)
+	if len(parts) == 0 {
+		return
+	}
+
+	cmdName := parts[0]
+	switch cmdName {
 	case helpCmd:
 		s.helpCmd()
+	case runCmd:
+		s.runCmd(parts[1:])
 	case clearCmd:
 		s.clearCmd()
 	case quitCmd:
 		s.quitCmd()
 	default:
-		if _, ok := s.mCmds[cmd]; ok {
-			s.switchCmd(cmd)
+		if _, ok := s.mCmds[cmdName]; ok {
+			s.switchCmd(cmdName)
 		} else {
 			s.execCommandWith(cmd)
 		}
 	}
+}
+
+func (s *Shell) runCmd(args []string) {
+	if len(args) == 0 {
+		s.println("Usage: /run <command> [args...]")
+		s.println()
+		s.println("Commands:")
+		for _, cmd := range s.cmds {
+			s.printf(" %s - %s\n", white(strings.TrimPrefix(cmd.name, "/")), cmd.desc)
+		}
+		s.println()
+		return
+	}
+
+	cmdName := args[0]
+	cmdArgs := args[1:]
+
+	cobraCmd, ok := s.mCmds[cmdName]
+	if !ok {
+		s.printf("Unknown command: %s\n", cmdName)
+		return
+	}
+
+	cobraCmd.Run(cobraCmd, cmdArgs)
 }
 
 func (s *Shell) helpCmd() {
@@ -188,9 +222,22 @@ func (s *Shell) printf(format string, a ...any) {
 func (s *Shell) autoCompleter() readline.AutoCompleter {
 	var pcs []readline.PrefixCompleterInterface
 
+	// Add basic commands
 	for _, cmd := range basicCmds {
-		pcs = append(pcs, readline.PcItem(cmd.name))
+		if cmd.name == "/"+runCmd {
+			// Create nested completion for /run command
+			var runSubCommands []readline.PrefixCompleterInterface
+			for _, c := range s.cmds {
+				cmdName := strings.TrimPrefix(c.name, "/")
+				runSubCommands = append(runSubCommands, readline.PcItem(cmdName))
+			}
+			pcs = append(pcs, readline.PcItem(cmd.name, runSubCommands...))
+		} else {
+			pcs = append(pcs, readline.PcItem(cmd.name))
+		}
 	}
+
+	// Add regular commands
 	for _, cmd := range s.cmds {
 		pcs = append(pcs, readline.PcItem(cmd.name))
 	}

@@ -102,7 +102,7 @@ $ gool jwt-decode eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwI
 | Command                | Description                                                                                                        |
 |------------------------|--------------------------------------------------------------------------------------------------------------------|
 | tsconv                 | Smart timestamp/date converter - auto-detects input type (default: show current time as both)                     |
-| mstsconv               | Smart millisecond timestamp/date converter (default: show current time as both)                                   |
+| msconv                 | Smart millisecond timestamp/date converter (default: show current time as both)                                   |
 | ts2date                | Covert unix timestamp to date (default: current time)                                                              |
 | date2ts                | Covert date to unix timestamp (default: current time)                                                              |
 | jwt-decode             | Decode [JWT](https://jwt.io/)                                                                                      |

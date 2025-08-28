@@ -11,8 +11,8 @@ import (
 	"github.com/cloudingcity/gool/pkg/date"
 )
 
-var mstsconvCmd = &cobra.Command{
-	Use:                   "mstsconv [input]",
+var msconvCmd = &cobra.Command{
+	Use:                   "msconv [input]",
 	Short:                 "Smart millisecond timestamp/date converter (default: show current time)",
 	Args:                  cobra.MaximumNArgs(1),
 	DisableFlagsInUseLine: true,

@@ -29,7 +29,7 @@ func init() {
 func commands() []*cobra.Command {
 	return []*cobra.Command{
 		tsconvCmd,
-		mstsconvCmd,
+		msconvCmd,
 		timestampToDateCmd,
 		dateToTimestampCmd,
 		jwtDecodeCmd,

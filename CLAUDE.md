@@ -35,9 +35,9 @@ Commands are implemented using the Cobra CLI framework. Each command:
 The interactive shell (`internal/shell/`) provides:
 - Command auto-completion with `/` prefix
 - Command switching (e.g., `/jwt-decode` switches to JWT decode mode)
-- Direct command execution without mode switching (e.g., `/run uuid 5`)
+- Direct command execution with arguments (e.g., `/uuid 5` executes directly, `/uuid` switches modes)
 - History management with temp directory storage
-- Built-in commands: `/help`, `/run`, `/clear`, `/quit`
+- Built-in commands: `/help`, `/clear`, `/quit`
 
 ## Development Commands
 
@@ -99,19 +99,21 @@ The `mstsconv` command works with millisecond timestamps:
   gool mstsconv "2021-01-01"     # Convert date to MS timestamp
   ```
 
-### /run Command (Interactive Shell Only)
-The `/run` command allows direct execution of any command without switching modes in the interactive shell:
-- **Syntax**: `/run <command> [args...]`
-- **Auto-completion**: Tab completion works for both command names and arguments
-- **No mode switching**: Commands execute immediately and return to main prompt
-- **Help**: Use `/run` without arguments to see available commands
+### Direct Command Execution (Interactive Shell)
+The interactive shell supports direct command execution when arguments are provided:
+- **With arguments**: `/command args` executes directly and returns to current mode
+- **Without arguments**: `/command` switches to that command's mode
+- **Stay in context**: Execute commands without losing your current working mode
 - **Examples**:
   ```bash
-  /run uuid 5                    # Generate 5 UUIDs
-  /run md5 hello                 # Compute MD5 hash of "hello"
-  /run tsconv 1609459200         # Convert timestamp to date
-  /run camel-case hello_world    # Convert to camelCase
-  /run base64-encode "text"      # Base64 encode text
+  # Direct execution with arguments
+  jwt-decode ❯ /uuid 5                    # Generate 5 UUIDs, stay in jwt-decode mode
+  jwt-decode ❯ /md5 hello                 # Compute MD5, stay in jwt-decode mode  
+  jwt-decode ❯ /tsconv 1609459200         # Convert timestamp, stay in jwt-decode mode
+  
+  # Mode switching without arguments
+  jwt-decode ❯ /uuid                      # Switch to uuid mode
+  uuid ❯
   ```
 
 ## Key Dependencies
